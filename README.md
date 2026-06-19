@@ -46,8 +46,8 @@ conda activate hoiclip
 ```
 
 ## d. Cài checkpoint và pretrained
-Đường dẫn drive: [HOICLIP_Checkpoints](https://drive.google.com/drive/folders/1uZ41TnfEr0GVoowvLv1eGiOQzp22qpKh?usp=drive_link)
-Nếu như muốn train mô hình từ đầu thì có thể tải file pretrained detr_r50.pth
+Đường dẫn drive: [HOICLIP_Checkpoints](https://drive.google.com/drive/folders/1uZ41TnfEr0GVoowvLv1eGiOQzp22qpKh?usp=drive_link).
+Nếu như muốn train mô hình từ đầu thì có thể tải file pretrained detr_r50.pth.
 Ngoài ra trong file có 2 file checkpoint:
 - checkpoint_last.pth: Tiếp tục train từ epochs trước (Checkpoint đã được train qua 30 epochs)
 - checkpoint_best.pth: Dùng để evaluate với epochs có kết quả tốt nhất
