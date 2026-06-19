@@ -29,8 +29,23 @@ Mô hình sử dụng trong mã nguồn này là **HOICLIP**, một trong nhữn
 
 ## 💻 4. Cách sử dụng (Usage)
 
-### Yêu cầu cấu hình hệ thống
-- Cài đặt đầy đủ các thư viện trong `requirements.txt` bao gồm: `torch`, `torchvision`, `opencv-python`, `numpy`, `threadpool`.
+## ⚙️ Cài đặt dự án (Installation)
+
+Để tải mã nguồn dự án và cài đặt các thư viện môi trường cần thiết, hãy thực hiện lần lượt các bước sau trong Terminal:
+
+```bash
+# 1. Clone (tải) kho mã nguồn từ GitHub về máy cục bộ
+git clone [https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git](https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git)
+
+# 2. Di chuyển vào thư mục dự án vừa tải về
+cd Implementation-of-HOICLIP-for-HOI-prediction
+
+# 3. Tạo một môi trường ảo Conda mới (Khuyến khích để tránh xung đột thư viện)
+conda create -n hoiclip python=3.9 -y
+conda activate hoiclip
+
+# 4. Cài đặt các thư viện bổ trợ bắt buộc
+pip install -r requirements.txt
 
 ### Chạy chế độ Đánh giá (Evaluation)
 Để tiến hành test kiểm thử mô hình và xuất file log kết quả tính mAP từ checkpoint tốt nhất (`checkpoint_best.pth`), sử dụng lệnh sau trong Terminal:
