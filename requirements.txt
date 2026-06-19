@@ -1,0 +1,13 @@
+cython
+pycocotools
+torch
+torchvision
+scipy
+opencv-python
+ftfy
+regex
+tqdm
+threadpoolctl
+threadpool
+kaggle
+kagglehub
