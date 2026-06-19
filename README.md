@@ -29,27 +29,23 @@ Mô hình sử dụng trong mã nguồn này là **HOICLIP**, một trong nhữn
 
 ## 4. Cách sử dụng (Usage)
 
-## Cài đặt dự án (Installation)
-
-Để tải mã nguồn dự án và cài đặt các thư viện môi trường cần thiết, hãy thực hiện lần lượt các bước sau trong Terminal:
-
-# 1. Clone (tải) kho mã nguồn từ GitHub về máy cục bộ
+### a. Clone (tải) kho mã nguồn từ GitHub về máy cục bộ
 ```bash
 git clone [https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git](https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git)
 ```
 
-# 2. Di chuyển vào thư mục dự án vừa tải về
+### b. Di chuyển vào thư mục dự án vừa tải về
 ```bash
 cd Implementation-of-HOICLIP-for-HOI-prediction
 ```
 
-# 3. Tạo một môi trường ảo Conda mới (Khuyến khích để tránh xung đột thư viện)
+### c. Tạo một môi trường ảo Conda mới (Khuyến khích để tránh xung đột thư viện)
 ```bash
 conda create -n hoiclip python=3.9 -y
 conda activate hoiclip
 ```
 
-# 4. Cài đặt các thư viện bổ trợ bắt buộc
+### d. Cài đặt các thư viện bổ trợ bắt buộc
 ```bash
 pip install -r requirements.txt
 ```
