@@ -1,0 +1,1 @@
+# Implementation-of-HOICLIP-for-HOI-prediction
