@@ -57,3 +57,28 @@ python main.py \
     --eval \
     --use_nms_filter \
     --json_file C:/Users/Thang/Downloads/HOICLIP/results.json
+
+##📈 5. Kết quả kỳ vọng (Expected Results)
+Sau khi quá trình Evaluation kết thúc, mô hình sẽ trả về các kết quả định dạng sau:
+
+Hiển thị trên Terminal: Điểm số mAP tính toán theo chuẩn VOC 11 điểm (bao gồm mAP full, mAP rare, và mAP non-rare).
+
+File kết quả đầu ra (results.json): Chứa cấu trúc lưu trữ chuẩn hóa phục vụ việc vẽ bounding box (Visualize):
+
+predictions: Danh sách chứa tọa độ bbox thô của tất cả các thực thể được phát hiện.
+
+hoi_prediction: Danh sách chứa các liên kết tương tác bao gồm: subject_id (vị trí index của người), object_id (vị trí index của vật thể), category_id (ID của hành động) và score (độ tự tin của tương tác).
+
+##⚠️ 6. Hạn chế (Limitations)
+Hiện tượng Overfitting bối cảnh tĩnh: Do camera an ninh có góc quay cố định, mô hình dễ bị học vẹt (overfit) vào bối cảnh nền của tập Train, dẫn đến Precision giảm khi kiểm thử trên các góc camera mới.
+
+Lỗi nhiễu hộp bọc sát rìa ảnh: Nhánh Regression đôi khi tính toán ra các tọa độ vượt biên (tọa độ âm) khi mục tiêu nằm ở rìa trên của khung hình (đã được khắc phục tạm thời bằng hàm clip_preds_boxes).
+
+Mật độ phân phối class lệch: Các tương tác hiếm (như đóng/mở cốp, xuống xe) có số lượng mẫu rất ít, khiến per-class mAP của các hành động này bị kéo thấp.
+
+##🚀 7. Hướng phát triển (Future Work)
+Tối ưu hóa siêu tham số lọc trùng (NMS): Thực hiện tinh chỉnh sâu các ngưỡng IoU (thres_nms) để loại bỏ hoàn toàn các box rác trùng lặp đè lên nhau, giúp thu gọn dung lượng file log JSON.
+
+Áp dụng Stratified Split dữ liệu: Thay đổi chiến thuật chia tập dữ liệu Train/Test theo Video-level hoặc Scene-level nhằm ngăn chặn triệt để hiện tượng rò rỉ dữ liệu (Data Leakage) giữa các frame ảnh liền kề.
+
+Tăng cường dữ liệu thời gian (Temporal Features): Tích hợp thêm các module xử lý chuỗi thời gian (như GRU, LSTM hoặc Temporal Transformer) để mô hình tận dụng thông tin luồng chuyển động của các frame trước đó, thay vì chỉ phân tích ảnh tĩnh độc lập.
