@@ -29,37 +29,54 @@ Mô hình sử dụng trong mã nguồn này là **HOICLIP**, một trong nhữn
 
 ## 4. Cách sử dụng (Usage)
 
-### a. Clone (tải) kho mã nguồn từ GitHub về máy cục bộ
+## a. Clone (tải) kho mã nguồn từ GitHub về máy cục bộ
 ```bash
-git clone [https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git](https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git)
+git clone https://github.com/Silverz27/Implementation-of-HOICLIP-for-HOI-prediction.git
 ```
 
-### b. Di chuyển vào thư mục dự án vừa tải về
+## b. Di chuyển vào thư mục dự án vừa tải về
 ```bash
 cd Implementation-of-HOICLIP-for-HOI-prediction
 ```
 
-### c. Tạo một môi trường ảo Conda mới (Khuyến khích để tránh xung đột thư viện)
+## c. Tạo một môi trường ảo Conda mới (Khuyến khích để tránh xung đột thư viện)
 ```bash
 conda create -n hoiclip python=3.9 -y
 conda activate hoiclip
 ```
 
-### d. Cài đặt các thư viện bổ trợ bắt buộc
+## d. Cài checkpoint và pretrained
+Đường dẫn drive: [HOICLIP_Checkpoints] (https://drive.google.com/drive/folders/1uZ41TnfEr0GVoowvLv1eGiOQzp22qpKh?usp=drive_link)
+Nếu như muốn train mô hình từ đầu thì có thể tải file pretrained detr_r50.pth
+Ngoài ra trong file có 2 file checkpoint:
+- checkpoint_last.pth: Tiếp tục train từ epochs trước (Checkpoint đã được train qua 30 epochs)
+- checkpoint_best.pth: Dùng để evaluate với epochs có kết quả tốt nhất
+Sau khi tải xong thì nên chuyển file vào thư mục train_results/ để phục vụ cho các bước sau
+
+## e. Cài đặt các thư viện bổ trợ bắt buộc
 ```bash
 pip install -r requirements.txt
 ```
 
-### Chạy chế độ Đánh giá (Evaluation)
-Để tiến hành test kiểm thử mô hình và xuất file log kết quả tính mAP từ checkpoint tốt nhất (`checkpoint_best.pth`), sử dụng lệnh sau trong Terminal:
+### Chạy chế độ huấn luyên (Train)
 
+
+### Chạy chế độ Đánh giá (Evaluation)
 ```bash
-python main.py \
-    --dataset_file hico \
-    --resume checkpoint_best.pth \
-    --eval \
-    --use_nms_filter \
-    --json_file C:/Users/Thang/Downloads/HOICLIP/results.json
+python -m torch.distributed.launch --nproc_per_node=2 --use_env main.py \
+  --resume train_results/checkpoint_best.pth \
+  --dataset_file hico \
+  --hoi_path /home/t4-vkist/.cache/kagglehub/datasets/sliverz/meva-datasets/versions/1 \
+  --num_obj_classes 3 \
+  --num_verb_classes 8 \
+  --backbone resnet50 \
+  --num_queries 64 \
+  --dec_layers 3 \
+  --eval \
+  --num_workers 2 \
+  --with_obj_clip_label \
+  --use_nms_filter \
+  --output_dir eval_results
 ```
 
 ## 5. Kết quả kỳ vọng (Expected Results)
